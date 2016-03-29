@@ -10,6 +10,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Panel extends JPanel {
 	
+	private JLabel introLabel;
+	private JButton instructionsButton;
+	private JButton singlePlayerBttn;
+	private JButton twoPlayerBttn;
+	private JButton leaderboardsBttn;
+	
 	public Panel(){
 	String name = "";	
 	JButton[][] buttons = new JButton [6][7];
@@ -18,16 +24,12 @@ public class Panel extends JPanel {
 	gbc.insets = new Insets (5,5,5,5);
 	setPreferredSize(new Dimension (640, 360));
 	
-	ImageIcon intro = new ImageIcon (System.getProperty("user.dir") + "\\titlee.png");
-	JLabel introLabel = new JLabel(intro);
-	gbc.gridx = 0;
-	gbc.gridy = 0;
-	add(introLabel, gbc);
 	
 	
 	ImageIcon instructions = new ImageIcon (System.getProperty("user.dir") + "\\Instructions Button.png");
 	JButton instructionsButton = new JButton (instructions);
 	add(instructionsButton, gbc);
+	instructionsButton.addActionListener(new ButtonListener());
 	
 	
 	ImageIcon singlePlayer = new ImageIcon (System.getProperty("user.dir") + "\\Single Player.png");
@@ -46,14 +48,25 @@ public class Panel extends JPanel {
 	JButton leaderboardsBttn = new JButton (leaderboards);
 	gbc.gridx = 0;
 	gbc.gridy = 3;
-	add(leaderboardsBttn, gbc);
+	add(leaderboardsBttn, gbc);	
 	
-	
-	
-	
-	
-	
+	ImageIcon intro = new ImageIcon (System.getProperty("user.dir") + "\\titlee.png");
+	JLabel introLabel = new JLabel(intro);
+	gbc.gridx = 0;
+	gbc.gridy = 0;
+	add(introLabel, gbc);
 	
 	}
+	
+	private class ButtonListener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent event) {
+		
+		}
+	}
+	
+	
+	
+	
 	
 }
