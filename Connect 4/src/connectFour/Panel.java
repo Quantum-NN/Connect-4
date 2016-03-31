@@ -24,15 +24,31 @@ public class Panel extends JPanel {
 	gbc.gridy = 0;
 	add(introLabel, gbc);
 	
+	
 	ImageIcon instructions = new ImageIcon (System.getProperty("user.dir") + "\\Instructions Button.png");
 	JButton instructionsButton = new JButton (instructions);
 	add(instructionsButton, gbc);
+	
 	
 	ImageIcon singlePlayer = new ImageIcon (System.getProperty("user.dir") + "\\Single Player.png");
 	JButton singlePlayerBttn = new JButton (singlePlayer);
 	gbc.gridx = 0;
 	gbc.gridy = 1;
 	add(singlePlayerBttn, gbc);
+	
+	ImageIcon twoPlayer = new ImageIcon (System.getProperty("user.dir") + "\\Two Player.png");
+	JButton twoPlayerBttn = new JButton (twoPlayer);
+	gbc.gridx = 0;
+	gbc.gridy = 2;
+	add(twoPlayerBttn, gbc);
+	
+	ImageIcon leaderboards = new ImageIcon (System.getProperty("user.dir") + "\\Leaderboards.png");
+	JButton leaderboardsBttn = new JButton (leaderboards);
+	gbc.gridx = 0;
+	gbc.gridy = 3;
+	add(leaderboardsBttn, gbc);
+	
+	
 	
 	
 	
