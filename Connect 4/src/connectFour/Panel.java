@@ -18,6 +18,8 @@ public class Panel extends JPanel {
 	private JLabel instructions;
 	private JButton backBttn;
 	private JButton singlePlayerBttn;
+	private JButton P1Bttn;
+	private JButton P2Bttn;
 	private JButton twoPlayerBttn;
 	private JButton instructionsButton;
 	private JButton leaderboardsBttn;
@@ -54,6 +56,20 @@ public class Panel extends JPanel {
 			add(backBttn, gbc);
 			backBttn.setVisible(false);
 			backBttn.addActionListener(new clickListener());
+			
+			P1Bttn =  new JButton("Player 1");
+			gbc.gridx = 0;
+			gbc.gridy = 2;
+			add(P1Bttn, gbc);
+			P1Bttn.setVisible(false);
+			P1Bttn.addActionListener(new clickListener());
+			
+			P2Bttn =  new JButton("Player 2");
+			gbc.gridx = 0;
+			gbc.gridy = 3;
+			add(P2Bttn, gbc);
+			P2Bttn.setVisible(false);
+			P2Bttn.addActionListener(new clickListener());
 
 			ImageIcon intro = new ImageIcon(System.getProperty("user.dir") + "\\titlee.png");
 			introLabel = new JLabel(intro);
@@ -217,10 +233,20 @@ public class Panel extends JPanel {
 				btn5.setVisible(true);
 				btn6.setVisible(true);
 				btn7.setVisible(true);
+				P1Bttn.setVisible(true);
+				P2Bttn.setVisible(true);
 
 				setBackground(Color.black);
 				// showBtns(gbc, btns);
 				showLabels(gbc, gridd);
+			}
+			if (event.getSource() == P1Bttn){
+				String name1 = JOptionPane.showInputDialog("Enter a name: ");
+				P1Bttn.setText(name1);
+			}
+			if (event.getSource() == P2Bttn){
+				String name2 = JOptionPane.showInputDialog("Enter a name: ");
+				P2Bttn.setText(name2);
 			}
 			if (event.getSource() == btn1) {
 				count += 1;
