@@ -16,6 +16,7 @@ public class Panel extends JPanel {
 	private JLabel winnerLabel1;
 	private JLabel winnerLabel2;
 	private JLabel instructions;
+	private JButton backBttn;
 	private JButton singlePlayerBttn;
 	private JButton twoPlayerBttn;
 	private JButton instructionsButton;
@@ -44,7 +45,15 @@ public class Panel extends JPanel {
 			GridBagConstraints gbc = new GridBagConstraints();
 			gbc.insets = new Insets(5, 5, 5, 5);
 			setPreferredSize(new Dimension(950, 600));
-			setBackground(Color.blue);
+			setBackground(Color.black);
+			
+			ImageIcon back = new ImageIcon(System.getProperty("user.dir") + "\\back.png");
+			backBttn = new JButton(back);
+			gbc.gridx = 0;
+			gbc.gridy = 3;
+			add(backBttn, gbc);
+			backBttn.setVisible(false);
+			backBttn.addActionListener(new clickListener());
 
 			ImageIcon intro = new ImageIcon(System.getProperty("user.dir") + "\\titlee.png");
 			introLabel = new JLabel(intro);
@@ -173,11 +182,23 @@ public class Panel extends JPanel {
 			if (event.getSource() == instructionsButton){
 				System.out.println("instructions clicked");
 				instructions.setVisible(true);
+				backBttn.setVisible(true);
 				introLabel.setVisible(false);
 				singlePlayerBttn.setVisible(false);
 				twoPlayerBttn.setVisible(false);
 				instructionsButton.setVisible(false);
 				leaderboardsBttn.setVisible(false);
+			}
+			if (event.getSource() == backBttn){
+				setBackground(Color.black);				
+				instructions.setVisible(false);
+				backBttn.setVisible(false);
+				introLabel.setVisible(true);
+				singlePlayerBttn.setVisible(true);
+				twoPlayerBttn.setVisible(true);
+				instructionsButton.setVisible(true);
+				leaderboardsBttn.setVisible(true);
+								
 			}
 			if (event.getSource() == twoPlayerBttn) {
 				instateGrid(grid);
@@ -197,7 +218,7 @@ public class Panel extends JPanel {
 				btn6.setVisible(true);
 				btn7.setVisible(true);
 
-				setBackground(Color.red);
+				setBackground(Color.black);
 				// showBtns(gbc, btns);
 				showLabels(gbc, gridd);
 			}
