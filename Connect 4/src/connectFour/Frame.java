@@ -1,8 +1,9 @@
 package connectFour;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
-public class Frame {
+
+public class Frame{
 
 	public static void main(String[] args) {
 			
@@ -15,4 +16,3 @@ public class Frame {
 		}
 
 	}
-
