@@ -241,12 +241,22 @@ public class Panel extends JPanel {
 				showLabels(gbc, gridd);
 			}
 			if (event.getSource() == P1Bttn){
+				int count = 0;
 				String name1 = JOptionPane.showInputDialog("Enter a name: ");
 				P1Bttn.setText(name1);
+				count++;
+				if (count == 1){
+					P1Bttn.setEnabled(false);
+				}
 			}
 			if (event.getSource() == P2Bttn){
+				int count = 0;
 				String name2 = JOptionPane.showInputDialog("Enter a name: ");
 				P2Bttn.setText(name2);
+				count++;
+				if (count == 1){
+					P2Bttn.setEnabled(false);
+				}
 			}
 			if (event.getSource() == btn1) {
 				count += 1;
@@ -363,9 +373,9 @@ public class Panel extends JPanel {
 					} else {
 						grid[i][colm].setvN(1);
 					}
-					win = winH()||winV()||winD1()||winD2();//NILU, THIS IS THE SPOT WHERE YOU GET THE TRUE OR FALSE VALUES.
+					win = winH()||winV()||winD1()||winD2();
 					if (win == true){
-						System.out.println(win);  // TAKE THE VALUES AND TELL THE USER THEY WON 
+						System.out.println(win);  // WIN DOES NOT WORK ALL THE TIME
 						// WHICH USER?, THE turnNum VARIABLE IN THIS METHOD CORESPONDS TO THE USER (1 OR 2)
 						btn1.setVisible(false);
 						btn2.setVisible(false);
