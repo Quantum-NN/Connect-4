@@ -16,6 +16,8 @@ public class Panel extends JPanel {
 	private JLabel winnerLabel1;
 	private JLabel winnerLabel2;
 	private JLabel instructions;
+	private JLabel Player1;
+	private JLabel Player2;
 	private JButton backBttn;
 	private JButton singlePlayerBttn;
 	private JButton P1Bttn;
@@ -57,6 +59,20 @@ public class Panel extends JPanel {
 			backBttn.setVisible(false);
 			backBttn.addActionListener(new clickListener());
 			
+			ImageIcon p1 = new ImageIcon(System.getProperty("user.dir") + "\\p1.png");
+			Player1 = new JLabel (p1);
+			gbc.gridx = 0;
+			gbc.gridy = 1;
+			add(Player1, gbc);
+			Player1.setVisible(false);
+			
+			ImageIcon p2 = new ImageIcon(System.getProperty("user.dir") + "\\p2.png");
+			Player2 = new JLabel (p2);
+			gbc.gridx = 0;
+			gbc.gridy = 3;
+			add(Player2, gbc);
+			Player2.setVisible(false);
+			
 			P1Bttn =  new JButton("Player 1");
 			gbc.gridx = 0;
 			gbc.gridy = 2;
@@ -66,7 +82,7 @@ public class Panel extends JPanel {
 			
 			P2Bttn =  new JButton("Player 2");
 			gbc.gridx = 0;
-			gbc.gridy = 3;
+			gbc.gridy = 4;
 			add(P2Bttn, gbc);
 			P2Bttn.setVisible(false);
 			P2Bttn.addActionListener(new clickListener());
@@ -235,6 +251,8 @@ public class Panel extends JPanel {
 				btn7.setVisible(true);
 				P1Bttn.setVisible(true);
 				P2Bttn.setVisible(true);
+				Player1.setVisible(true);
+				Player2.setVisible(true);
 
 				setBackground(Color.black);
 				// showBtns(gbc, btns);
