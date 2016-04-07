@@ -1,7 +1,5 @@
 package connectFour;
 
-
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -394,7 +392,7 @@ public class Panel extends JPanel {
 					win = winH()||winV()||winD1()||winD2();
 					if (win == true){
 						System.out.println(win);  // WIN DOES NOT WORK ALL THE TIME
-						// WHICH USER?, THE turnNum VARIABLE IN THIS METHOD CORESPONDS TO THE USER (1 OR 2)
+						// WHICH USER?, THE turnNum VARIABLE IN THIS METHOD CORESPONDS TO THE USER (1 OR 0)
 						btn1.setVisible(false);
 						btn2.setVisible(false);
 						btn3.setVisible(false);
@@ -433,6 +431,36 @@ public class Panel extends JPanel {
 					}
 					win = winH()||winV()||winD1()||winD2();
 					System.out.println(win);
+					if (win == true){
+						System.out.println(win);  // WIN DOES NOT WORK ALL THE TIME
+						// WHICH USER?, THE turnNum VARIABLE IN THIS METHOD CORESPONDS TO THE USER (1 OR 0)
+						btn1.setVisible(false);
+						btn2.setVisible(false);
+						btn3.setVisible(false);
+						btn4.setVisible(false);
+						btn5.setVisible(false);
+						btn6.setVisible(false);
+						btn7.setVisible(false);
+						
+						if (turnNum == 1){
+							winnerLabel1.setVisible(true);
+							quitBttn.setVisible(true);
+							P1Bttn.setVisible(false);
+							P2Bttn.setVisible(false);
+							Player1.setVisible(false);
+							Player2.setVisible(false);
+							
+						}
+						if (turnNum == 0){
+							winnerLabel2.setVisible(true);
+							quitBttn.setVisible(true);
+							P1Bttn.setVisible(false);
+							P2Bttn.setVisible(false);
+							Player1.setVisible(false);
+							Player2.setVisible(false);
+						}
+						
+					}
 				}
 				break;
 			}
