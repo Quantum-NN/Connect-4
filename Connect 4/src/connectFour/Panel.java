@@ -16,6 +16,7 @@ public class Panel extends JPanel {
 	private JLabel instructions;
 	private JLabel Player1;
 	private JLabel Player2;
+	private JLabel Draw;
 	private JButton backBttn;
 	private JButton singlePlayerBttn;
 	private JButton P1Bttn;
@@ -48,6 +49,13 @@ public class Panel extends JPanel {
 			gbc.insets = new Insets(5, 5, 5, 5);
 			setPreferredSize(new Dimension(950, 600));
 			setBackground(Color.black);
+			
+			ImageIcon draw = new ImageIcon(System.getProperty("user.dir") + "\\draw.png");
+			Draw = new JLabel (draw);
+			gbc.gridx = 0;
+			gbc.gridy = 1;
+			add(Draw, gbc);
+			Draw.setVisible(false);
 			
 			ImageIcon back = new ImageIcon(System.getProperty("user.dir") + "\\back.png");
 			backBttn = new JButton(back);
@@ -276,37 +284,37 @@ public class Panel extends JPanel {
 			}
 			if (event.getSource() == btn1) {
 				count += 1;
-				setPieces(0, count % 2, gridd);
+				setPieces(0,count, count % 2, gridd);
 				updateLabels(gbc);
 			}
 			if (event.getSource() == btn2) {
 				count += 1;
-				setPieces(1, count % 2, gridd);
+				setPieces(1,count, count % 2, gridd);
 				updateLabels(gbc);
 			}
 			if (event.getSource() == btn3) {
 				count += 1;
-				setPieces(2, count % 2, gridd);
+				setPieces(2,count, count % 2, gridd);
 				updateLabels(gbc);
 			}
 			if (event.getSource() == btn4) {
 				count += 1;
-				setPieces(3, count % 2, gridd);
+				setPieces(3,count, count % 2, gridd);
 				updateLabels(gbc);
 			}
 			if (event.getSource() == btn5) {
 				count += 1;
-				setPieces(4, count % 2, gridd);
+				setPieces(4,count, count % 2, gridd);
 				updateLabels(gbc);
 			}
 			if (event.getSource() == btn6) {
 				count += 1;
-				setPieces(5, count % 2, gridd);
+				setPieces(5,count, count % 2, gridd);
 				updateLabels(gbc);
 			}
 			if (event.getSource() == btn7) {
 				count += 1;
-				setPieces(6, count % 2, gridd);
+				setPieces(6,count, count % 2, gridd);
 				updateLabels(gbc);
 			}
 			if (event.getSource() == quitBttn){
@@ -374,7 +382,7 @@ public class Panel extends JPanel {
 		}
 	}
 
-	private void setPieces(int colm, int turnNum, JLabel[][] labels) {
+	private void setPieces(int colm,int count, int turnNum, JLabel[][] labels) {
 		for (int i = 5; i >= 0; i--) {
 			if (!grid[i][colm].getOStat()) {
 				grid[i][colm].setOStat(true);
@@ -390,6 +398,22 @@ public class Panel extends JPanel {
 						grid[i][colm].setvN(1);
 					}
 					win = winH()||winV()||winD1()||winD2();
+					if (count == 42){
+						btn1.setVisible(false);
+						btn2.setVisible(false);
+						btn3.setVisible(false);
+						btn4.setVisible(false);
+						btn5.setVisible(false);
+						btn6.setVisible(false);
+						btn7.setVisible(false);
+						quitBttn.setVisible(true);
+						P1Bttn.setVisible(false);
+						P2Bttn.setVisible(false);
+						Player1.setVisible(false);
+						Player2.setVisible(false);
+						Draw.setVisible(true);
+						
+					}
 					if (win == true){
 						System.out.println(win);  // WIN DOES NOT WORK ALL THE TIME
 						// WHICH USER?, THE turnNum VARIABLE IN THIS METHOD CORESPONDS TO THE USER (1 OR 0)
