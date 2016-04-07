@@ -406,10 +406,19 @@ public class Panel extends JPanel {
 						if (turnNum == 1){
 							winnerLabel1.setVisible(true);
 							quitBttn.setVisible(true);
+							P1Bttn.setVisible(false);
+							P2Bttn.setVisible(false);
+							Player1.setVisible(false);
+							Player2.setVisible(false);
+							
 						}
-						if (turnNum == 2){
+						if (turnNum == 0){
 							winnerLabel2.setVisible(true);
 							quitBttn.setVisible(true);
+							P1Bttn.setVisible(false);
+							P2Bttn.setVisible(false);
+							Player1.setVisible(false);
+							Player2.setVisible(false);
 						}
 						
 					}
@@ -485,14 +494,18 @@ public class Panel extends JPanel {
 		int horizTot = 0;
 		int horiz = 0;
 		for (int i = 5; i >= 0; i--) {
-			//horizTot = 0;
+			horizTot = 0;
 			for (int j = 0; j < 7; j++) {
 				if (grid[i][j].getPlayer() == 0){
 					horizTot += grid[i][j].gethN();
 					horiz = 0;
 				}
-				else if (grid[i][j].getPlayer() == 1){
+				if (grid[i][j].getPlayer() == 1){
 					horiz += grid[i][j].gethN();
+					horizTot = 0;
+				}
+				if (grid[i][j].getPlayer() != 1 && grid[i][j].getPlayer() != 0){
+					horiz =0;;
 					horizTot = 0;
 				}
 				if ((Math.abs(horizTot)) > 3|| (Math.abs(horiz) >3)){
@@ -510,23 +523,29 @@ public class Panel extends JPanel {
 		int d = 0;
 		int k = 0;
 		for (int i = 5; i >= 0; i--) {
-			k = i+1;
+			k = i;
+			dTot = 0;
+			d = 0;
 			for (int j = 0; j < 7; j++) {
-				k-=1;
 				if (grid[k][j].getPlayer() == 0){
 					dTot += grid[k][j].getdN1();
 					d = 0;
 				}
-				else if (grid[k][j].getPlayer() == 1){
+				if (grid[k][j].getPlayer() == 1){
 					d += grid[k][j].getdN1();
 					dTot = 0;
 				}
-				if ((Math.abs(dTot)) > 3|| (Math.abs(d) >3)){
+				if (grid[k][j].getPlayer() != 1 && grid[k][j].getPlayer() != 0){
+					d =0;
+					dTot = 0;
+				}
+				if ((Math.abs(dTot)) > 3|| (Math.abs(d) > 3)){
 					return true;
 				}
 				if (k==0){
 					j =7;
 				}
+				k-=1;
 			}
 			
 		}
@@ -535,14 +554,20 @@ public class Panel extends JPanel {
 		k = 0;
 		for (int i = 0; i < 6; i++) {
 			k = i;
+			dTot = 0;
+			d = 0;
 			for (int j = 6; j >=0; j--) {
 				
 				if (grid[k][j].getPlayer() == 0){
 					dTot += grid[k][j].getdN1();
 					d = 0;
 				}
-				else if (grid[k][j].getPlayer() == 1){
+				if (grid[k][j].getPlayer() == 1){
 					d += grid[k][j].getdN1();
+					dTot = 0;
+				}
+				if (grid[k][j].getPlayer() != 1 && grid[k][j].getPlayer() != 0){
+					d =0;
 					dTot = 0;
 				}
 				if ((Math.abs(dTot)) > 3|| (Math.abs(d) >3)){
@@ -565,14 +590,20 @@ public class Panel extends JPanel {
 		int k = 0;
 		for (int i = 5; i >= 0; i--) {
 			k = i+1;
+			dTot = 0;
+			d = 0;
 			for (int j = 6; j >=0; j--) {
 				k-=1;
 				if (grid[k][j].getPlayer() == 0){
 					dTot += grid[k][j].getdN2();
 					d = 0;
 				}
-				else if (grid[k][j].getPlayer() == 1){
+				if (grid[k][j].getPlayer() == 1){
 					d += grid[k][j].getdN2();
+					dTot = 0;
+				}
+				if (grid[k][j].getPlayer() != 1 && grid[k][j].getPlayer() != 0){
+					d =0;
 					dTot = 0;
 				}
 				if ((Math.abs(dTot)) > 3|| (Math.abs(d) >3)){
@@ -589,14 +620,20 @@ public class Panel extends JPanel {
 		k = 0;
 		for (int i = 0; i < 6; i++) {
 			k = i;
+			dTot = 0;
+			d = 0;
 			for (int j = 0; j <7; j++) {
 				
 				if (grid[k][j].getPlayer() == 0){
 					dTot += grid[k][j].getdN2();
 					d = 0;
 				}
-				else if (grid[k][j].getPlayer() == 1){
+				if (grid[k][j].getPlayer() == 1){
 					d += grid[k][j].getdN2();
+					dTot = 0;
+				}
+				if (grid[k][j].getPlayer() != 1 && grid[k][j].getPlayer() != 0){
+					d =0;
 					dTot = 0;
 				}
 				if ((Math.abs(dTot)) > 3|| (Math.abs(d) >3)){
