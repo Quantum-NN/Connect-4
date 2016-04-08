@@ -1,15 +1,20 @@
 package connectFour;
-
+// imports
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * the panel class that holds all the components of the panel and goes into the JFrame
+ * @author Aum, Nilukshan
+ *
+ */
 public class Panel extends JPanel {
 
+	// variables 
 	private JLabel introLabel;
 	private JLabel winnerLabel1;
 	private JLabel winnerLabel2;
@@ -34,13 +39,26 @@ public class Panel extends JPanel {
 	private JButton btn5;
 	private JButton btn6;
 	private JButton btn7;
+	private Random rn = new Random();
 	private boolean win;
-	int count = 0;
+	private int count = 0;
+	private int gameMode = 0;
+	private int oNumH = 0; // o stands for offence 
+	private int oNumV = 0;
+	private int oNumD1 = 0;
+	private int oNumD2 = 0;
+	private int dNumH = -1;// d stands for defense 
+	private int dNumV = -1;
+	private int dNumD1 = -1;
+	private int dNumD2 = -1;
 	ImageIcon yp;
 	ImageIcon ep;
 	ImageIcon rp;
 	ImageIcon gp;
 
+	/**
+	 * The main constructor method for the panel which contains all the components for the JPanel
+	 */
 	public Panel() {
 
 		try {
@@ -211,6 +229,12 @@ public class Panel extends JPanel {
 		}
 	}
 
+	/**
+	 * the action listner inner class, for the butons 
+	 * 
+	 * @author Aum, Nilukshan
+	 *
+	 */
 	private class clickListener implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 
@@ -227,6 +251,27 @@ public class Panel extends JPanel {
 				instructionsButton.setVisible(false);
 				leaderboardsBttn.setVisible(false);
 			}
+			if (event.getSource() == singlePlayerBttn){
+				gameMode = 1;
+				instateGrid(grid);
+				System.out.println("one player clicked");
+				instructions.setVisible(false);
+				introLabel.setVisible(false);
+				singlePlayerBttn.setVisible(false);
+				twoPlayerBttn.setVisible(false);
+				instructionsButton.setVisible(false);
+				leaderboardsBttn.setVisible(false);
+
+				btn1.setVisible(true);
+				btn2.setVisible(true);
+				btn3.setVisible(true);
+				btn4.setVisible(true);
+				btn5.setVisible(true);
+				btn6.setVisible(true);
+				btn7.setVisible(true);
+				
+				showLabels(gbc, gridd);
+			}
 			if (event.getSource() == backBttn){
 				setBackground(Color.black);				
 				instructions.setVisible(false);
@@ -239,6 +284,7 @@ public class Panel extends JPanel {
 								
 			}
 			if (event.getSource() == twoPlayerBttn) {
+				gameMode = 2;
 				instateGrid(grid);
 				System.out.println("two player clicked");
 				instructions.setVisible(false);
@@ -286,41 +332,48 @@ public class Panel extends JPanel {
 				count += 1;
 				setPieces(0,count, count % 2, gridd);
 				updateLabels(gbc);
+				aiAction(gbc);
 			}
 			if (event.getSource() == btn2) {
 				count += 1;
 				setPieces(1,count, count % 2, gridd);
 				updateLabels(gbc);
+				aiAction(gbc);
 			}
 			if (event.getSource() == btn3) {
 				count += 1;
 				setPieces(2,count, count % 2, gridd);
 				updateLabels(gbc);
+				aiAction(gbc);
 			}
 			if (event.getSource() == btn4) {
 				count += 1;
 				setPieces(3,count, count % 2, gridd);
 				updateLabels(gbc);
+				aiAction(gbc);
 			}
 			if (event.getSource() == btn5) {
 				count += 1;
 				setPieces(4,count, count % 2, gridd);
 				updateLabels(gbc);
+				aiAction(gbc);
 			}
 			if (event.getSource() == btn6) {
 				count += 1;
 				setPieces(5,count, count % 2, gridd);
 				updateLabels(gbc);
+				aiAction(gbc);
 			}
 			if (event.getSource() == btn7) {
 				count += 1;
 				setPieces(6,count, count % 2, gridd);
 				updateLabels(gbc);
+				aiAction(gbc);
 			}
 			if (event.getSource() == quitBttn){
 				System.exit(0);
 			}
-			
+
 		//	System.out.print(count);
 			
 			setBackground(Color.black);
@@ -328,6 +381,10 @@ public class Panel extends JPanel {
 		}
 	}
 
+	/**
+	 * Instantiates the grid and gives its first default values.
+	 * @param grid
+	 */
 	private void instateGrid(Piece[][] grid) {
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 7; j++) {
@@ -336,7 +393,10 @@ public class Panel extends JPanel {
 		}
 	}
 
-
+	/**
+	 * Creates new labels, as empty spaces for the checkers
+	 * @return
+	 */
 	private JLabel[][] createLabels() {
 		JLabel[][] labels = new JLabel[6][7];
 		for (int i = 0; i < 6; i++) {
@@ -348,6 +408,11 @@ public class Panel extends JPanel {
 		return labels;
 	}
 
+	/**
+	 * Hows the labels on to the screen by adding them to the panel
+	 * @param gbc, the grid bag constraint layout object
+	 * @param labels, the array of labels
+	 */
 	private void showLabels(GridBagConstraints gbc, JLabel[][] labels) {
 
 		labels = createLabels();
@@ -362,6 +427,10 @@ public class Panel extends JPanel {
 		}
 	}
 
+	/**
+	 * the method that updates the screen when a move is made
+	 * @param gbc
+	 */
 	private void updateLabels(GridBagConstraints gbc) {
 		for (int i = 0; i < 6; i++) {// 6 and 7 as it goes up to 6 and 7, they
 										// are not included
@@ -382,6 +451,13 @@ public class Panel extends JPanel {
 		}
 	}
 
+	/**
+	 * This method gives the grid its values as the players enter information. 
+	 * @param colm, the vertical column number the move was made in
+	 * @param count, the number of move, so max 42 moves, and the game wil end at 42.
+	 * @param turnNum, the number which tells what player made the move.
+	 * @param labels, the 2D array with the labels
+	 */
 	private void setPieces(int colm,int count, int turnNum, JLabel[][] labels) {
 		for (int i = 5; i >= 0; i--) {
 			if (!grid[i][colm].getOStat()) {
@@ -415,8 +491,8 @@ public class Panel extends JPanel {
 						
 					}
 					if (win == true){
-						System.out.println(win);  // WIN DOES NOT WORK ALL THE TIME
-						// WHICH USER?, THE turnNum VARIABLE IN THIS METHOD CORESPONDS TO THE USER (1 OR 0)
+						gameMode = 5;
+						System.out.println(win);  
 						btn1.setVisible(false);
 						btn2.setVisible(false);
 						btn3.setVisible(false);
@@ -454,10 +530,9 @@ public class Panel extends JPanel {
 						grid[i][colm].setvN(1);
 					}
 					win = winH()||winV()||winD1()||winD2();
-					System.out.println(win);
 					if (win == true){
-						System.out.println(win);  // WIN DOES NOT WORK ALL THE TIME
-						// WHICH USER?, THE turnNum VARIABLE IN THIS METHOD CORESPONDS TO THE USER (1 OR 0)
+						gameMode = 5;
+						System.out.println(win); 
 						btn1.setVisible(false);
 						btn2.setVisible(false);
 						btn3.setVisible(false);
@@ -483,16 +558,33 @@ public class Panel extends JPanel {
 							Player1.setVisible(false);
 							Player2.setVisible(false);
 						}
-						
 					}
 				}
 				break;
 			}
-
 		}
-
 	}
 
+	/*
+	 * The method that makes the AI play its turn, and defends the vertical when its at 3.
+	 */
+	private void aiAction(GridBagConstraints gbc){
+		if (gameMode == 1){
+			count++;
+			int i = rn.nextInt(7);
+			do {
+				i = rn.nextInt(7);
+			}while(grid[0][i].getOStat());
+			System.out.println(i);
+				setPieces(i,count, (count % 2), gridd);	
+			dNumV = -1;
+		}
+		updateLabels(gbc);
+	}
+	
+	/**
+	 * The method that updates the grid numbers in the horizontal to display later
+	 */
 	private void updateHoriz() {
 		for (int i = 5; i >= 0; i--) {
 			for (int j = 0; j < 7; j++) {
@@ -509,6 +601,9 @@ public class Panel extends JPanel {
 		}
 	}
 	
+	/**
+	 * The method that updates the diagonal1 / after every move
+	 */
 	private void updateDiag1(){
 		for (int i = 5; i >= 0; i--) {
 			for (int j = 0; j < 7; j++) {
@@ -525,6 +620,9 @@ public class Panel extends JPanel {
 		}
 	}
 	
+	/**
+	 *  The method that updates the diagonal2 \ after every move
+	 */
 	private void updateDiag2(){
 		for (int i = 5; i >= 0; i--) {
 			for (int j = 0; j < 7; j++) {
@@ -541,6 +639,10 @@ public class Panel extends JPanel {
 		}
 	}
 
+	/**
+	 * This boolean method checks if there are any wins in the horizontal rows
+	 * @return
+	 */
 	private boolean winH() {
 		updateHoriz();
 		int horizTot = 0;
@@ -557,18 +659,35 @@ public class Panel extends JPanel {
 					horizTot = 0;
 				}
 				if (grid[i][j].getPlayer() != 1 && grid[i][j].getPlayer() != 0){
-					horiz =0;;
+					horiz =0;
 					horizTot = 0;
 				}
+				if ((Math.abs(horiz)) ==3){
+					if (j<6){
+					if (!grid[i][j+1].getOStat()){
+						
+						dNumH = j+1;
+						}
+					}else if (!grid[i][j-1].getOStat()){
+						if (j>0){
+						dNumH = j-1;
+						}
+					}
+					System.out.println(dNumH);
+				}
 				if ((Math.abs(horizTot)) > 3|| (Math.abs(horiz) >3)){
+
 					return true;
 				}
-			}
-			
+			}	
 		}
 		return false;
 	}
 	
+	/**
+	 * This boolean method checks if there are any wins in the / diagonal1
+	 * @return
+	 */
 	private boolean winD1(){
 		updateDiag1();
 		int dTot = 0;
@@ -587,6 +706,7 @@ public class Panel extends JPanel {
 					d += grid[k][j].getdN1();
 					dTot = 0;
 				}
+				
 				if (grid[k][j].getPlayer() != 1 && grid[k][j].getPlayer() != 0){
 					d =0;
 					dTot = 0;
@@ -599,7 +719,6 @@ public class Panel extends JPanel {
 				}
 				k-=1;
 			}
-			
 		}
 		dTot = 0;
 		d = 0;
@@ -630,11 +749,14 @@ public class Panel extends JPanel {
 				}
 				k+=1;
 			}
-			
 		}
 		return false;
 	}
 	
+	/**
+	 * This method checks if there are any wins in the \ diagonal 2;
+	 * @return
+	 */
 	private boolean winD2(){
 		updateDiag2();
 		int dTot = 0;
@@ -701,16 +823,19 @@ public class Panel extends JPanel {
 		return false;
 	}
 	
+	/**
+	 * This method checks if there are any wins in the vertical columns.
+	 * @return
+	 */
 	private boolean winV(){
 		for (int i = 5; i >= 0; i--) {
 			for (int j = 0; j < 7; j++) {
+				
 				if (grid[i][j].getvN() >3){
 					return true;
 				}
 			}
-			
 		}
 		return false;
 	}
-
 }

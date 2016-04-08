@@ -5,6 +5,10 @@ import javax.swing.JFrame;
 
 public class Frame{
 
+	/**
+	 * Creates the frame of the game
+	 * @param args
+	 */
 	public static void main(String[] args) {
 			
 			JFrame frame = new JFrame ("Quantum Connect 4");
