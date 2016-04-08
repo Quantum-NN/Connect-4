@@ -28,7 +28,6 @@ public class Panel extends JPanel {
 	private JButton P2Bttn;
 	private JButton twoPlayerBttn;
 	private JButton instructionsButton;
-	private JButton leaderboardsBttn;
 	private JButton quitBttn;
 	private JLabel gridd[][] = new JLabel[6][7];
 	private Piece grid[][] = new Piece[6][7];
@@ -43,7 +42,7 @@ public class Panel extends JPanel {
 	private boolean win;
 	private int count = 0;
 	private int gameMode = 0;
-	private int oNumH = 0; // o stands for offence 
+	private int oNumH = 0; // o stands for offense 
 	private int oNumV = 0;
 	private int oNumD1 = 0;
 	private int oNumD2 = 0;
@@ -168,13 +167,7 @@ public class Panel extends JPanel {
 			add(instructionsButton, gbc);
 			instructionsButton.addActionListener(new clickListener());
 
-			ImageIcon leaderboards = new ImageIcon(System.getProperty("user.dir") + "\\Leaderboards.png");
-			leaderboardsBttn = new JButton(leaderboards);
-			gbc.gridx = 0;
-			gbc.gridy = 4;
-			add(leaderboardsBttn, gbc);
-			leaderboardsBttn.addActionListener(new clickListener());
-
+			
 			yp = new ImageIcon(System.getProperty("user.dir") + "\\yp.png");
 			ep = new ImageIcon(System.getProperty("user.dir") + "\\ep.png");
 			rp = new ImageIcon(System.getProperty("user.dir") + "\\rp.png");
@@ -249,7 +242,7 @@ public class Panel extends JPanel {
 				singlePlayerBttn.setVisible(false);
 				twoPlayerBttn.setVisible(false);
 				instructionsButton.setVisible(false);
-				leaderboardsBttn.setVisible(false);
+				
 			}
 			if (event.getSource() == singlePlayerBttn){
 				gameMode = 1;
@@ -260,7 +253,7 @@ public class Panel extends JPanel {
 				singlePlayerBttn.setVisible(false);
 				twoPlayerBttn.setVisible(false);
 				instructionsButton.setVisible(false);
-				leaderboardsBttn.setVisible(false);
+				
 
 				btn1.setVisible(true);
 				btn2.setVisible(true);
@@ -280,7 +273,7 @@ public class Panel extends JPanel {
 				singlePlayerBttn.setVisible(true);
 				twoPlayerBttn.setVisible(true);
 				instructionsButton.setVisible(true);
-				leaderboardsBttn.setVisible(true);
+				
 								
 			}
 			if (event.getSource() == twoPlayerBttn) {
@@ -292,7 +285,7 @@ public class Panel extends JPanel {
 				singlePlayerBttn.setVisible(false);
 				twoPlayerBttn.setVisible(false);
 				instructionsButton.setVisible(false);
-				leaderboardsBttn.setVisible(false);
+				
 
 				btn1.setVisible(true);
 				btn2.setVisible(true);
@@ -374,7 +367,7 @@ public class Panel extends JPanel {
 				System.exit(0);
 			}
 
-		//	System.out.print(count);
+		
 			
 			setBackground(Color.black);
 
@@ -565,7 +558,7 @@ public class Panel extends JPanel {
 		}
 	}
 
-	/*
+	/**
 	 * The method that makes the AI play its turn, and defends the vertical when its at 3.
 	 */
 	private void aiAction(GridBagConstraints gbc){
